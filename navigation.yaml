@@ -1,0 +1,88 @@
+
+attacker:
+  DOF: 2
+  collision_radius: 0.4
+  comm_range: 8
+  extend_dis: 0
+  sen_range: 8
+  step_size: 0.1
+  tau: 0.2
+  vmax: 3
+
+defaults:
+- _self_
+- override hydra/hydra_logging: disabled
+- override hydra/job_logging: disabled
+
+defender:
+  DOF: 2
+  action_dim: 32
+  collision_radius: 0.4
+  comm_range: 8
+  sen_range: 8
+  step_size: 0.1
+  tau: 0
+  vmax: 3
+  L: 0.3
+  l: 0.15
+  k_delta: 2
+  k_v: 2
+  tau_delta: 1
+  tau_v: 1
+  min_dist: 4
+  discrete: True
+
+env:
+  task: Navigation
+  attacker_class: Evader
+  defender_class: Pursuer
+  difficulty: 1
+  max_steps: 20
+  name: Pursuit_Env
+  num_attacker: 15
+  num_defender: 15
+  num_protector: 0
+  num_target: 15
+  # navigation环境中，num_attacker=num_defender=num_target
+  state_dim: 4
+  step_size: 0.1
+  goal_range: 5
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+main: null
+map:
+  center:
+  - 20
+  - 20
+  map_size:
+  - 40
+  - 40
+  num_u_shaped: 1
+  variance_u_shaped: 5
+  u_shape:
+  - 14
+  - 8
+  num_blocks: 20
+  block_shape:
+  - 2
+  - 2 
+
+  # center:
+  # - 7
+  # - 7
+  # map_size:
+  # - 15
+  # - 15
+  # max_num_obstacle: 0  
+  # num_obstacle_block: 3
+  # variance: 3
+  # obstacle_shape:
+  # - 2
+  # - 3
+
+  resolution: 0.5
+sensor:
+  num_beams: 36
+  fov: 360
